@@ -46,6 +46,7 @@
             <!-- Form to make the chart -->
             <section class="col-md-9 min-vh-100" style="background: #f8f9fa; background-image: url(/images/bg-table.png);">
                 <canvas class="p-5 " id="myChart" ></canvas>
+                
             </section>
         </div>
         
@@ -56,19 +57,39 @@
         </script>
         <!-- Graph.js function -->
         <script>
-            var xValues = [50,60,70,80,90,100,110,120,130,140,150];
-            var yValues = [7,8,8,9,9,9,10,11,14,14,15];
-            var myChart = new Chart("myChart", {
+            var test1 = <%-JSON.stringify(xaxis) %>; 
+            var test2 = <%-JSON.stringify(yaxis) %>; 
+            var xValues = test1;
+            var yValues = test2
+            let chart = new Chart("myChart", {
                 type: "line",
                 data: {
                     labels: xValues,
+                    fill: false,
                     datasets: [{
-                    backgroundColor: "rgba(0,0,0,1.0)",
-                    borderColor: "rgba(0,0,0,0.1)",
-                    data: yValues
+                        label: 'Power Consumed',
+                        borderColor: "#000000",
+                        borderDash: [2, 2],
+                        pointBackgroundColor: "#00C851",
+                        pointBorderColor: "#00C851",
+                        pointHoverBackgroundColor: "#55bae7",
+                        pointHoverBorderColor: "#55bae7",
+                        data: yValues
                     }]
+                },
+                
+                // plugins: [ChartDataLabels],
+                options: {
+                    scales: {
+                    xAxis: {
+                        // The axis for this scale is determined from the first letter of the id as `'x'`
+                        // It is recommended to specify `position` and / or `axis` explicitly.
+                        type: 'time',
+                    }
+                    }
                 }
             });
+            options.scales[scaleId].grid = "blue";
         </script>
     </body>
 </html>

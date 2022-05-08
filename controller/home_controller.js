@@ -1,9 +1,26 @@
 const Power = require("../models/power");
 const Data = require("../models/data");
-module.exports.home = (req, res)=>{
-    return res.render('home',{
-        title: "Workurious | Electricity Bill"
-    });
+const path = require('path');
+module.exports.home = async (req, res)=>{
+    try{
+        const power = await Power.find({}).sort('year').sort('month');
+        const x = [];
+        const y = [];
+        const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+        power.forEach((element)=>{
+            const xvalue = path.join(month[element.month]+' '+element.year);
+            x.push(xvalue);
+            y.push(element.value);
+        });
+        return res.render('home',{
+            title: "Workurious | Electricity Bill",
+            xaxis: x,
+            yaxis: y
+        });
+    }catch(err){
+        console.log(err);
+        return;
+    }
 }
 module.exports.createData = async (req, res)=>{
     try{
