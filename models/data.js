@@ -7,7 +7,7 @@ const dataSchema = new mongoose.Schema({
     eDate: {
         type: Date
     },
-    pConsumed: {
+    power: {
         type: Number
     }
 },{
