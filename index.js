@@ -11,13 +11,13 @@ app.use(bodyParser.json());
 // set path for static files
 app.use(express.static('./assets'));
 
-// use express router
-app.use('/', require('./routes'));
-
 // set up the view engine
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
+
+// use express router
+app.use('/', require('./routes'));
 
 // setting the port
 let port = process.env.PORT;
